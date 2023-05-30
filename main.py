@@ -1,37 +1,59 @@
+from random import randint
+
+
 def proc1():
-    print(Div3(11))
+    list = []
+    for i in range(0, 5):
+        list.append(randint(1, 99))
+
+    inp = int(input())
+    flag: bool = False
+    for i in range(0, 5):
+        print(list[i], end=" ")
+        if list[i] == inp:
+            flag = True
+    print("User numb:", inp)
+    if flag:
+        print("Congratulation, this number stored in list")
+    else:
+        print("This numb does not exist")
+
 
 def proc2():
-    print(div100(10))
+    list = []
+    for i in range(0, 5):
+        list.append(randint(1, 99))
+    cou = {}
+    for i in range(0, 5):
+        if cou.get(list[i], -1) == -1:
+            cou[list[i]] = 0
+        cou[list[i]] += 1
+
+    for i in cou.keys():
+        print(i, ": ", cou[i])
+
 
 def proc3():
-    print(LuckCh("02.11.2021"))
+    days = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
+    print("Amount of day offs:", end="")
+    numb = int(input())
+    print("Day off: ", end=" ")
+    for i in range(7 - numb, 7):
+        print(days[i], end=" ")
+    print()
+    print("Working days: ", end=" ")
+    for i in range(0, 7 - numb):
+        print(days[i], end=" ")
+    print()
+
 
 def proc4():
-    print(TicCheck("3856"))
+    list1 = ["List1Name1", "List1Name2", "List1Name3", "List1Name4"]
+    list2 = ["List2Name1", "List2Name2", "List2Name3", "List2Name4"]
+    Team = (list1[0], list1[1], list2[2], list2[3])
+    print("Group1:", *list1, sep=" ")
+    print("Group2:", *list2, sep=" ")
+    print("Team List:", *Team, sep=", ")
+    print("TeamSize", len(Team))
+    print("Am of Ivanov", Team.count("Ivanov"))
 
-def Div3(inp: int) -> bool:
-    return inp % 3 == 0
-
-def div100(delimetr) -> str:
-    delimetr = str(delimetr)
-    if delimetr == "0":
-        return "Err: Zero Div"
-    if not (delimetr.isnumeric()):
-        return "Err: string input"
-    delimetr = int(delimetr)
-    return 100 / delimetr
-
-def LuckCh(inp: str) -> bool:
-    inp = inp.split(".")
-    return (int(inp[0])) * (int(inp[1])) == ((int(inp[2])) % 100)
-
-def TicCheck(inp: str) -> bool:
-    checkSum: int = 0
-    for i in range(0, int(len(inp) / 2)):
-        checkSum += int(inp[i])
-        checkSum -= int(inp[int(len(inp) / 2 + i)])
-    if checkSum == 0:
-        return True
-    else:
-        return False
